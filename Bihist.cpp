@@ -40,7 +40,7 @@
 		group_id ="BIHIST" + utilities::make_string(sufix);
 
 		//buffer = NULL;
-		k = get_key(reg, (char*)group_id.c_str(), (char*)"USEBIHIST");
+		k = get_key(reg, (char*)group_id.c_str(), "USEBIHIST");
 		if (k)
 			bihflag = get_int(k);
 		else return -1;
@@ -48,20 +48,20 @@
 
 		if (bihflag==1){
 			
-			if ((k = get_key(reg, (char*)group_id.c_str(), (char*)"BIHISTFILE")) != NULL)
+			if ((k = get_key(reg, (char*)group_id.c_str(), "BIHISTFILE")) != NULL)
 				bihistfl= get_string(k);
 			boost::algorithm::trim(bihistfl);
 						
 			logger<<" Bihistogram file: " << bihistfl << "\n";
 
 
-			k = get_key(reg, (char*)group_id.c_str(), (char*)"NCLASSES");
+			k = get_key(reg, (char*)group_id.c_str(), "NCLASSES");
 			if (k)
 				imclas = get_int(k);
 			else return -1;
 			logger << " Number of classes for bihistogram: "<<utilities::make_string(imclas) <<"\n";
 
-			if ((k = get_key(reg, (char*)group_id.c_str(), (char*)"AUXILIARYFILE")) != NULL)
+			if ((k = get_key(reg, (char*)group_id.c_str(), "AUXILIARYFILE")) != NULL)
 				auxbihistfl= get_string(k);
 			boost::algorithm::trim(auxbihistfl);
 			

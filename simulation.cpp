@@ -82,28 +82,28 @@ void Cl_Simulation ::  Genpath (GSLibGridPars &grid_def, int nmult, int mults)
 {
 
 	unsigned int  ix,iy,iz;
-	long long nn;
-	long long temp2;
-	long long swape;
+	unsigned long nn; 
+	unsigned long temp2;
+	unsigned long swape;
 
 		
 	unsigned int nx= grid_def.get_nx();
 	unsigned int ny= grid_def.get_ny();
 	unsigned int nz= grid_def.get_nz();
-	long long nxyz=grid_def.get_nxyz();
+	unsigned long nxyz=grid_def.get_nxyz();
 
 	// The Do loop assigns values to the arrays order and sim. order is now (1,2,...,nxyz-1,nxyz)
 	// and sim has random numbers in the [0;1] subset */
 	
-	for (long long i=1; i<=nxyz; ++i)
+	for (unsigned long i=1; i<=nxyz; ++i) 
 	{
 		order->grid[i] = i;
 	}
 
 
-	for (long long i=1; i<=nxyz; ++i)
+	for (unsigned long i=1; i<=nxyz; ++i) 
 	{
-		temp2=  (long long) (outer_RNG->random_double() *(nxyz+1-i)) + i;
+		temp2=  (unsigned long) (outer_RNG->random_double() *(nxyz+1-i)) + i;
 
 		swape = order->grid[i];
 		order->grid[i]= order->grid[temp2];
@@ -145,10 +145,10 @@ GSLibGrid<float>* Cl_Simulation :: Simulate(int isim, misc& utils,
 	sim= new GSLibGrid<float>(*grid_def);
 
 
-	long long nxyz=grid_def->get_nxyz();
+	unsigned long nxyz=grid_def->get_nxyz();
 
 	// put nullvalues on grid 
-	for (long long i=1; i<=nxyz; ++i)
+	for (unsigned int i=1; i<=nxyz; ++i)
 		sim->grid[i]=utils.nosvalue;
 
 
@@ -185,7 +185,7 @@ GSLibGrid<float>* Cl_Simulation :: Simulate(int isim, misc& utils,
 		for (unsigned int i = 0; i < Zones.n_zones; i++)
 			Zones.zone[i]->harddata->Dtonode ( *grid_def, utils, sim->grid, *(Zones).zone_grid, i, Zones.n_zones);
 
-		for (long long l=0; l<grid_def->get_nxyz(); ++l)
+		for (unsigned long l=0; l<grid_def->get_nxyz(); ++l) 
 		{
 			int id = (int)sim->grid[l+1];
 			
@@ -237,7 +237,7 @@ GSLibGrid<float>* Cl_Simulation :: Simulate(int isim, misc& utils,
 	// now we enter the parallel bits, we do it in parts to save memory 
 	// in the coordination of the threads. 
 
-	long long nodemax=0;
+	unsigned int nodemax=0;
 
 	logger << "Simulating\n";
 
@@ -368,7 +368,7 @@ double keep_distribution_limits(pseudoharddata &pseudo, int currentpseudo, Hardd
 	return newsim;
 }
 
-void Cl_Simulation ::SimulNode (long long start, long long nodemax, KrigePars &krige,
+void Cl_Simulation ::SimulNode (int start, unsigned long nodemax, KrigePars &krige,
 				BlocksPars &blocks, Zones_Pars &zones, misc &utils, pseudoharddata& pseudo,
 				SearchPars &search_pars)
 {	
@@ -403,7 +403,7 @@ void Cl_Simulation ::SimulNode (long long start, long long nodemax, KrigePars &k
 
 
 
-	for (long long in = start + nodemax; in <= nodemax + MAXNODES_THREAD; in = in + numprocess) {
+	for (unsigned long in = start + nodemax; in <= nodemax + MAXNODES_THREAD; in = in + numprocess) {
 		if (in > grid_def->get_nxyz()) return;
 
 

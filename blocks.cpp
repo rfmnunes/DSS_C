@@ -5,7 +5,7 @@ int BlocksPars::read_blocks_parameters(registry *reg){
 	reg_key *k;
 	// Start blocks pars
 
-	k = get_key(reg, (char*)("BLOCKS"), (char*)("USEBLOCKS"));
+	k = get_key(reg,  ("BLOCKS"),  ("USEBLOCKS"));
 	if (k)
 		blocksflag = get_int(k);
 	else return -1;
@@ -13,13 +13,13 @@ int BlocksPars::read_blocks_parameters(registry *reg){
 	if (blocksflag==1)
 	{
 
-		k = get_key(reg, (char*)("BLOCKS"), (char*)("MAXBLOCKS"));
+		k = get_key(reg,  ("BLOCKS"),  ("MAXBLOCKS"));
 		if (k)
 			maxblocks = get_int(k);
 		else return -1;
 
 
-		if ((k = get_key(reg, (char*)("BLOCKS"), (char*)("BLOCKSFILE"))) != NULL)
+		if ((k = get_key(reg,  ("BLOCKS"),  ("BLOCKSFILE"))) != NULL)
 			blocksfile= get_string(k);
 		boost::algorithm::trim(blocksfile);
 		logger<<" Blocks file: "<< blocksfile <<"\n";
@@ -189,7 +189,7 @@ void BlocksPars::get_block_to_point_covtable(std::shared_ptr<VariogramPars> &var
 
 	double cov, covasum;
 
-	long long nxyz= grid_def.get_nxyz();
+	unsigned int nxyz= grid_def.get_nxyz();
 
 
 	block2point_covt = new  float*[n_blocks] ;
