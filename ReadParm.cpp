@@ -28,7 +28,7 @@ int Readparm (registry *reg, Cl_mtrng** outer_RNG)
 	double p;
 
 	long seed;
-	k = get_key(reg, (char*)("GENERAL"), (char*)("SEED"));
+	k = get_key(reg,  ("GENERAL"),  ("SEED"));
 	if (k){
 		seed = get_long(k);
 		//seed_random(seed);

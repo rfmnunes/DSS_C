@@ -12,12 +12,12 @@ void clss_log::open_log(registry *reg )
 	//dbgfl  = dbgfl_in;
 	//idbg= idbg_in;
 	
-	k = get_key(reg, (char*)("DEBUG"), (char*)("DBGLEVEL"));
+	k = get_key(reg,  ("DEBUG"),  ("DBGLEVEL"));
 	if (k)
 		idbg = get_int(k);
 	//else return -1;
 		
-	if ((k = get_key(reg, (char*)("DEBUG"), (char*)("DBGFILE"))) != NULL)
+	if ((k = get_key(reg,  ("DEBUG"),  ("DBGFILE"))) != NULL)
 		dbgfl= get_string(k);
 	
 	boost::algorithm::trim(dbgfl);

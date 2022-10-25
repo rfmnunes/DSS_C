@@ -36,7 +36,7 @@ int main (int argc, char *argv[])
 	// also for debug memory leaks
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 
-	//unsigned long   i;
+	unsigned long   i;
 	int    isim;
 
 	char default_registry_file[] = "ssdir.par";
@@ -261,7 +261,7 @@ int main (int argc, char *argv[])
 
 	// Set up the covariance table for spiral search
 	
-	for (int i = 0; i < Zones.n_zones; i++){
+	for (i = 0; i < Zones.n_zones; i++){
 			
 		Zones.zone[i]->variogram->Ctable (*grid_def,utils); // TODO PUT ON ZONES
 		

@@ -7,12 +7,12 @@ int KrigePars::Read_krige_pars(registry *reg)
 		
 // parsing kriging section
 
-k = get_key(reg, (char*)("KRIGING"), (char*)("KTYPE"));
+k = get_key(reg,  ("KRIGING"),  ("KTYPE"));
 if (k)
 	ktype = get_int(k);
 else return -1;
 
-k = get_key(reg, (char*)("KRIGING"), (char*)("COLOCORR"));
+k = get_key(reg,  ("KRIGING"),  ("COLOCORR"));
 if (k)
 	colocorr = get_float(k);
 else return -1;
@@ -23,14 +23,14 @@ if (ktype == 4||ktype == 6)
 
 if (ktype > 2){
 
-	if ((k = get_key(reg, (char*)("KRIGING"), (char*)("SOFTFILE"))) != NULL)
+	if ((k = get_key(reg,  ("KRIGING"),  ("SOFTFILE"))) != NULL)
 		secfl= get_string(k);
 	
 	boost::algorithm::trim(secfl);
 
 	logger<<" Secondary data (grid): "<< secfl <<"\n";
 
-	k = get_key(reg, (char*)("KRIGING"), (char*)("RESCALE"));
+	k = get_key(reg,  ("KRIGING"),  ("RESCALE"));
 	if (k)
 		rescale = get_int(k);
 	else return -1;
@@ -39,7 +39,7 @@ if (ktype > 2){
 
 if (ktype == 2 || ktype >= 6){
 
-	if ((k = get_key(reg, (char*)("KRIGING"), (char*)("LVMFILE"))) != NULL)
+	if ((k = get_key(reg,  ("KRIGING"),  ("LVMFILE"))) != NULL)
 		lvmfl= get_string(k);
 	
 	boost::algorithm::trim(lvmfl);
@@ -49,19 +49,19 @@ if (ktype == 2 || ktype >= 6){
 }
 
 
-k = get_key(reg, (char*)("KRIGING"), (char*)("NVARIL"));
+k = get_key(reg,  ("KRIGING"),  ("NVARIL"));
 if (k)
 	nvaril = get_int(k);
 else return -1;
 
-k = get_key(reg, (char*)("KRIGING"), (char*)("ICOLLVM"));
+k = get_key(reg,  ("KRIGING"),  ("ICOLLVM"));
 if (k)
 	icollvm = get_int(k);
 else return -1;
 printf (" Number of columns/column in sec. file: %d %d \n",nvaril,icollvm);
 
 if (ktype > 4){
-	if ((k = get_key(reg, (char*)("KRIGING"), (char*)("CCFILE"))) != NULL)
+	if ((k = get_key(reg,  ("KRIGING"),  ("CCFILE"))) != NULL)
 		corrfl= get_string(k);
 	boost::algorithm::trim(corrfl);
 
@@ -205,7 +205,7 @@ KrigePars::KrigePars(registry *reg, GSLibGridPars& grid_def,
 
 	if (ktype >= 4) {
 
-		long long   index;
+		unsigned long   index;
 		if (rescale == 1)
 		{
 			// do it zone to zone
